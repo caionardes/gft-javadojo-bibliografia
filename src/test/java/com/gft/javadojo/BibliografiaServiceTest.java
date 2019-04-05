@@ -21,7 +21,14 @@ public class BibliografiaServiceTest {
 	public void formatarNome_test() {
 		String formatado = bibliografiaService.formatarNome("Jose da Silva");
 
-		assertEquals(formatado, "Jose da Silva");
+		assertEquals(formatado, "SILVA, Jose da");
+	}
+
+	@Test
+	public void formatarNomeUnico_test() {
+		String formatado = bibliografiaService.formatarNome("Santos");
+
+		assertEquals(formatado, "SANTOS");
 	}
 
 }
