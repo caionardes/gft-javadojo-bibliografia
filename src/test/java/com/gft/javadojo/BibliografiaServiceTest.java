@@ -18,18 +18,50 @@ public class BibliografiaServiceTest {
 	private BibliografiaService bibliografiaService;
 	
 	@Test
-	public void formatarNome_test() {
-		String formatado = bibliografiaService.formatarNome("Jose da Silva");
+	public void test_formatarNome_TresNomes() {
+		String formatado = bibliografiaService.formatarNome("Jose Silva");
 
-		assertEquals(formatado, "SILVA, Jose da");
+		assertEquals("SILVA, Jose", formatado);
 	}
 
 	@Test
-	public void formatarNomeUnico_test() {
+	public void test_formatarNome_QuatroNomes() {
+		String formatado = bibliografiaService.formatarNome("Jose Silva Moreira Fernandes");
+
+		assertEquals("FERNANDES, Jose Silva Moreira", formatado);
+	}
+	
+	@Test
+	public void test_formatarNome_UnicoNome() {
 		String formatado = bibliografiaService.formatarNome("Santos");
 
-		assertEquals(formatado, "SANTOS");
+		assertEquals("SANTOS", formatado);
 	}
 
+	// Caio Nardes, Cassia de Oliveira, Ricardo Martins Taques, Mohamad Al Salim U Meca
+	@Test
+	public void test_formatarNome_NomesBonitosCodingDojo() {
+			assertEquals("NARDES, Caio", bibliografiaService.formatarNome("Caio Nardes"));
+			assertEquals("OLIVEIRA, Cassia de", bibliografiaService.formatarNome("Cassia de Oliveira"));
+			assertEquals("TAQUES, Ricardo Martins", bibliografiaService.formatarNome("Ricardo Martins Taques"));
+			assertEquals("MECA, Mohamad Al Salim U", bibliografiaService.formatarNome("Mohamad Al Salim U Meca"));
+	}
+	
+	
+	//"FILHO", "FILHA", "NETO", "NETA", "SOBRINHO", "SOBRINHA" ou "JUNIOR"
+	@Test
+	public void test_formatarNome_SufixoEspecialNoSobrenome() {
+		String formatado = bibliografiaService.formatarNome("Jose Silva Filho");
+
+		assertEquals("SILVA FILHO, Jose", formatado);
+	}
+
+	//"da", "de", "do", "das", "dos"
+	@Test
+	public void test_formatarNome_ConectivosNoSobrenome() {
+		String formatado = bibliografiaService.formatarNome("Jose da Silva");
+
+		assertEquals("SILVA, Jose da", formatado);
+	}
 }
 
